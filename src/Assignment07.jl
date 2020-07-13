@@ -72,6 +72,7 @@ function complement(seq::AbstractString)
 end
 
 function reverse_complement(seq)
+    seq = normalizeDNA(seq)
     reverse_sequence = reverse(seq)
     sequence = collect(reverse_sequence)
     reverse_complement = map(complement, sequence)
@@ -79,7 +80,7 @@ function reverse_complement(seq)
 end
 
 function parse_fasta(path)
-    header = []
+    header = String[]
     sequence = []
     seqonly = []
     for line in eachline(path)
